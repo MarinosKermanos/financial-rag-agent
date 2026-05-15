@@ -1,12 +1,10 @@
+import sys
 import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import requests
-from dotenv import load_dotenv
 from dataclasses import dataclass
-
-load_dotenv()
-
-NEWS_API_KEY = os.getenv("NEWS_API_KEY")
-NEWS_API_URL = os.getenv("NEWS_API_URL")
+from config import Config
 
 DEFAULT_QUERIES = [
     "forex EUR USD",
@@ -32,10 +30,10 @@ def fetch_articles(query: str, page_size: int = 10) -> list[Article]:
         "language": "en",
         "sortBy": "publishedAt",
         "pageSize": page_size,
-        "apiKey": NEWS_API_KEY,
+        "apiKey": Config.NEWS_API_KEY,
     }
 
-    response = requests.get(NEWS_API_URL, params=params, timeout=10)
+    response = requests.get(Config.NEWS_API_URL, params=params, timeout=10)
     response.raise_for_status()
     data = response.json()
 
