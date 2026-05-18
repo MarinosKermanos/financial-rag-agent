@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 .venv/
 qdrant_storage/
+.vscode/
