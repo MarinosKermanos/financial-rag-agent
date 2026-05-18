@@ -11,7 +11,7 @@ from agent.tracing import get_langfuse_handler
 
 load_dotenv()
 
-# ─── System Prompt ────────────────────────────────────────────────────────────
+# System Prompt
 # This is the ReAct prompt template. ReAct = Reason + Act.
 # The agent loops through: Thought → Action → Observation → Thought → ...
 # until it reaches a Final Answer.
@@ -49,7 +49,7 @@ Thought: {agent_scratchpad}
 """)
 
 
-# ─── LLM ─────────────────────────────────────────────────────────────────────
+# LLM
 
 def get_llm():
     return ChatOpenAI(
@@ -82,7 +82,7 @@ def create_agent_executor() -> AgentExecutor:
     )
 
 
-# ─── Main Query Function ──────────────────────────────────────────────────────
+# Main Query Function
 
 def query_agent(question: str) -> str:
     """
@@ -99,7 +99,7 @@ def query_agent(question: str) -> str:
     return result.get("output", "No answer generated.")
 
 
-# ─── Manual Test ─────────────────────────────────────────────────────────────
+# Manual Test
 
 if __name__ == "__main__":
     test_questions = [
