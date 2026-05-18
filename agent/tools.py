@@ -40,7 +40,7 @@ def get_forex_price(symbol: str) -> str:
     Use this when the user asks about current prices or exchange rates.
     """
     # Normalize input: remove slashes, uppercase
-    symbol = symbol.upper().replace("/", "").replace("-", "").strip()
+    symbol = symbol.upper().replace("/", "").replace("-", "").strip().strip("'\"")
 
     if len(symbol) != 6:
         return f"Invalid symbol '{symbol}'. Use format like EURUSD, GBPUSD, USDJPY."

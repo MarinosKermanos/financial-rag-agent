@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from langfuse import Langfuse
-from langfuse.callback import CallbackHandler
+from langfuse.langchain import CallbackHandler
 
 load_dotenv()
 
@@ -23,8 +23,4 @@ def get_langfuse_handler() -> CallbackHandler:
     You just pass this handler into any LangChain chain/agent and 
     everything gets logged to LangFuse automatically.
     """
-    return CallbackHandler(
-        public_key=os.getenv("LANGFUSE_PUBLIC_KEY"),
-        secret_key=os.getenv("LANGFUSE_SECRET_KEY"),
-        host=os.getenv("LANGFUSE_HOST", "https://cloud.langfuse.com"),
-    )
+    return CallbackHandler()
