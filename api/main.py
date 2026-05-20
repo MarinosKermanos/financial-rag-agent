@@ -53,6 +53,21 @@ def health():
     return {"status": "healthy"}
 
 
+@app.post("/ingest")
+def ingest():
+    """Trigger news ingestion into Qdrant. Run once after deployment."""
+    try:
+        from ingestion.fetcher import fetch_all_articles
+        from ingestion.chunker import chunk_articles
+        from ingestion.embedder import store_chunks
+        articles = fetch_all_articles()
+        chunks = chunk_articles(articles)
+        store_chunks(chunks)
+        return {"status": "ok", "chunks_stored": len(chunks)}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
+
 @app.post("/chat", response_model=ChatResponse)
 def chat(request: ChatRequest):
     """
