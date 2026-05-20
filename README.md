@@ -2,6 +2,8 @@
 
 An agentic AI system that answers financial questions by combining semantic search over recent news with live forex data — built as a portfolio project targeting production-grade AI engineering standards.
 
+
+**Live UI:** `https://streamlit-ui-production-578d.up.railway.app/` 
 **Live API:** `https://financial-rag-agent-production.up.railway.app/docs`
 
 ---
@@ -203,11 +205,14 @@ Access your traces at [cloud.langfuse.com](https://cloud.langfuse.com).
 
 ## Deployment
 
-Deployed on Railway with two services:
+Deployed on Railway with three services:
 - **financial-rag-agent** — FastAPI app (Dockerfile-based)
+- **streamlit-ui** — Streamlit chat UI (Nixpacks)
 - **qdrant** — Qdrant vector DB (Docker image), private networking only
 
 Environment variables are configured per-service in Railway. Qdrant is not exposed publicly — only the API service can reach it via `qdrant.railway.internal`.
+
+After first deployment, trigger news ingestion once by calling `POST /ingest` via the API docs. This populates Qdrant with the financial news corpus.
 
 ---
 
