@@ -10,9 +10,14 @@ from config import Config
 import uuid
 
 openai_client = OpenAI(api_key=Config.OPENAI_API_KEY)
+qdrant_host = os.getenv("QDRANT_HOST", "localhost")
+qdrant_port = int(os.getenv("QDRANT_PORT", 6333))
+use_tls = os.getenv("QDRANT_USE_TLS", "false").lower() == "true"
+
 qdrant_client = QdrantClient(
-    host=Config.QDRANT_HOST,
-    port=Config.QDRANT_PORT,
+    host=qdrant_host,
+    port=qdrant_port,
+    https=use_tls,
 )
 
 
