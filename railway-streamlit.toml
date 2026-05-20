@@ -2,5 +2,5 @@
 builder = "nixpacks"
 
 [deploy]
-startCommand = "sh -c 'API_URL=${API_URL} streamlit run streamlit_app.py --server.port $PORT --server.address 0.0.0.0'"
+startCommand = "sh -c 'uv run streamlit run streamlit_app.py --server.port $PORT --server.address 0.0.0.0'"
 restartPolicyType = "on_failure"
